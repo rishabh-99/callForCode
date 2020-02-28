@@ -55,7 +55,7 @@ app.post("/api/insertImage", function(req, res){
   var img = req.body.image;
   console.log(req.body.name)
   var realFile = Buffer.from(img,"base64");
-  fs.writeFile(`/public/images/${name}`, realFile, function(err) {
+  fs.writeFile(`./public/images/${name}`, realFile, function(err) {
       if(err)
          console.log(err);
    });
