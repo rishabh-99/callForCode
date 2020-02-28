@@ -53,12 +53,14 @@ app.post('/api/insertData', (req, res) =>{
 app.post("/api/insertImage", function(req, res){
   var name = req.body.name;
   var img = req.body.image;
+  console.log(req.body.name)
   var realFile = Buffer.from(img,"base64");
   fs.writeFile(name, realFile, function(err) {
       if(err)
          console.log(err);
    });
    res.send("OK");
+   console.log('AA')
  });
 
 
