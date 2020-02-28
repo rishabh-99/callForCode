@@ -27,6 +27,12 @@ var cloudant = Cloudant({
     "username": "907c4623-3cbd-4372-9390-3bc90b6cf33e-bluemix"
   });
 
+  app.get('/', (req, res) =>{
+
+    res.send('MC')
+
+});
+
 app.get('/api/insertData', (req, res) =>{
 
         cloudant.use('call_for_code').insert({ happy: true }).then((data) => {
