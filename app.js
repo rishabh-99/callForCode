@@ -41,7 +41,7 @@ var cloudant = Cloudant({
 
 app.get('/api/insertData', (req, res) =>{
 
-        cloudant.use('call_for_code').insert({ happy: true }).then((data) => {
+        cloudant.use('call_for_code').insert(req).then((data) => {
           console.log(data);
           res.status(200).send("OK")
       }).catch((err) => {
