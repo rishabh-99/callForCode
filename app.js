@@ -1,8 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
-//Database
+const multer = require('multer');
+const upload = multer({dest: __dirname + '/public/images'});
 const cors = require('cors')
+var fs = require("fs");
+
 const corsOptions = {
   origin: '*',
   optionsSuccessStatus: 200
@@ -10,6 +13,9 @@ const corsOptions = {
 
 const app = express();
 app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true, limit: "50gb" }));
+app.use(express.static('public'));
+
 app.use(cors(corsOptions))
 var Cloudant = require('@cloudant/cloudant');
 
@@ -44,7 +50,16 @@ app.get('/api/insertData', (req, res) =>{
 
 });
 
-
+app.post("/imageInsert", function(req, res){
+  var name = req.body.name;
+  var img = req.body.image;
+  var realFile = Buffer.from(img,"base64");
+  fs.writeFile(name, realFile, function(err) {
+      if(err)
+         console.log(err);
+   });
+   res.send("OK");
+ });
 
 
 const PORT = process.env.PORT || 3000;
