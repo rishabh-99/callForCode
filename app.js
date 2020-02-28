@@ -43,14 +43,14 @@ app.post('/api/insertData', (req, res) =>{
         console.log(req.body)
         cloudant.use('call_for_code').insert(req.body).then((data) => {
           console.log(data);
-          res.status(200).send("OK")
+          res.send(data.id)
       }).catch((err) => {
         console.log(err);
       });
 
 });
 
-app.post("/imageInsert", function(req, res){
+app.post("/api/insertImage", function(req, res){
   var name = req.body.name;
   var img = req.body.image;
   var realFile = Buffer.from(img,"base64");
