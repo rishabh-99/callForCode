@@ -40,7 +40,7 @@ var cloudant = Cloudant({
 });
 
 app.post('/api/insertData', (req, res) =>{
-        console.log(req)
+        console.log(req.body)
         cloudant.use('call_for_code').insert(req.body).then((data) => {
           console.log(data);
           res.status(200).send("OK")
