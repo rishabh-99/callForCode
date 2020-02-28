@@ -63,6 +63,16 @@ app.post("/api/insertImage", function(req, res){
    console.log('AA')
  });
 
+ 
+ app.post("/api/searchDetails", function(req, res){
+  
+  fs.readFile(`./public/images/${req.body.name}`,(err,data) => {
+    if(err)
+      console.log(err);
+    res.send(data);
+  })
+  
+ });
 
 const PORT = process.env.PORT || 3000;
 
