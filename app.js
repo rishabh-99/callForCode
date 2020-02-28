@@ -69,7 +69,7 @@ app.post("/api/insertImage", function(req, res){
   fs.readFile(`./public/images/${req.body.name}`,(err,data) => {
     if(err)
       console.log(err);
-    res.sendFile(__dirname+`./public/images/${req.body.name}`)
+    res.sendFile(__dirname+`/public/images/${req.body.name}`)
   })
   
  });
