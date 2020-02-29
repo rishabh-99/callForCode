@@ -63,7 +63,7 @@ app.post("/api/insertImage", function(req, res){
   });
   
   lineReader.on('line', function (line) {
-    fs.writeFile(`./public/images/${line}${name}`, realFile, function(err) {
+    fs.writeFile(`./public/images/${line}_${name}`, realFile, function(err) {
       if(err)
          console.log(err);
    });
