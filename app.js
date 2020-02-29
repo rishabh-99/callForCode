@@ -69,7 +69,15 @@ app.post("/api/insertImage", function(req, res){
    });
     val = parseInt(line);
     val++;
+    if(val<=9){
     str = `00${val}`;
+    }
+    else if(val<=99){
+      str = `0${val}`;
+    }
+    else {
+      str = `${val}`;
+    }
     fs.writeFile(__dirname+'/counter',str, (err) => console.log(err));
   });    
  
