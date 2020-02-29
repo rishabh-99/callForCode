@@ -5,6 +5,7 @@ const multer = require('multer');
 const upload = multer({dest: __dirname + '/public/images'});
 const cors = require('cors')
 var fs = require("fs");
+var rl = require('readline');
 
 const corsOptions = {
   origin: '*',
@@ -32,10 +33,12 @@ var cloudant = Cloudant({
     "url": "https://907c4623-3cbd-4372-9390-3bc90b6cf33e-bluemix:f55c31896c7118a7027a762e9f34b748da37597b54e29fbc5349d2958d35dfe1@907c4623-3cbd-4372-9390-3bc90b6cf33e-bluemix.cloudantnosqldb.appdomain.cloud",
     "username": "907c4623-3cbd-4372-9390-3bc90b6cf33e-bluemix"
   });
+  require('dotenv').config()
+  
 
-  app.get('/', (req, res) =>{
+  app.get('/',async (req, res) =>{
 
-    res.send('MC')
+    
 
 });
 
@@ -54,11 +57,22 @@ app.post("/api/insertImage", function(req, res){
   var name = req.body.name;
   var img = req.body.image;
   console.log(req.body.name)
-  var realFile = Buffer.from(img,"base64");
-  fs.writeFile(`./public/images/${name}`, realFile, function(err) {
+  // var realFile = Buffer.from(img,"base64");
+  var lineReader = rl.createInterface({
+    input: fs.createReadStream(__dirname+'/counter')
+  });
+  
+  lineReader.on('line', function (line) {
+    fs.writeFile(`./public/images/${line}${name}`, realFile, function(err) {
       if(err)
          console.log(err);
    });
+    val = parseInt(line);
+    val++;
+    str = `00${val}`;
+    fs.writeFile(__dirname+'/counter',str, (err) => console.log(err));
+  });    
+ 
    res.send("OK");
    console.log('AA')
  });
