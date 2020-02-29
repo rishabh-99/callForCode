@@ -57,7 +57,7 @@ app.post("/api/insertImage", function(req, res){
   var name = req.body.name;
   var img = req.body.image;
   console.log(req.body.name)
-  // var realFile = Buffer.from(img,"base64");
+  var realFile = Buffer.from(img,"base64");
   var lineReader = rl.createInterface({
     input: fs.createReadStream(__dirname+'/counter')
   });
